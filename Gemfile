@@ -1,9 +1,10 @@
 source 'https://rubygems.org'
 
 gem 'rails', '~> 5.0.0'
-gem 'sqlite3'
+gem 'pg'
 gem 'puma', '~> 3.0'
 gem 'annotate'
+gem 'active_model_serializers', '~> 0.10.0'
 
 group :development, :test do
   gem 'pry-byebug'
@@ -15,5 +16,6 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'awesome_print'
 end
+gem 'rails_12factor', group: :production
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

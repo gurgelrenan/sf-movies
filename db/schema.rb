@@ -12,13 +12,16 @@
 
 ActiveRecord::Schema.define(version: 20160722001342) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "actor_movies", force: :cascade do |t|
     t.integer  "actor_id"
     t.integer  "movie_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["actor_id"], name: "index_actor_movies_on_actor_id"
-    t.index ["movie_id"], name: "index_actor_movies_on_movie_id"
+    t.index ["actor_id"], name: "index_actor_movies_on_actor_id", using: :btree
+    t.index ["movie_id"], name: "index_actor_movies_on_movie_id", using: :btree
   end
 
   create_table "actors", force: :cascade do |t|
@@ -32,7 +35,7 @@ ActiveRecord::Schema.define(version: 20160722001342) do
     t.integer  "movie_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["movie_id"], name: "index_fun_facts_on_movie_id"
+    t.index ["movie_id"], name: "index_fun_facts_on_movie_id", using: :btree
   end
 
   create_table "location_movies", force: :cascade do |t|
@@ -40,8 +43,8 @@ ActiveRecord::Schema.define(version: 20160722001342) do
     t.integer  "movie_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["location_id"], name: "index_location_movies_on_location_id"
-    t.index ["movie_id"], name: "index_location_movies_on_movie_id"
+    t.index ["location_id"], name: "index_location_movies_on_location_id", using: :btree
+    t.index ["movie_id"], name: "index_location_movies_on_movie_id", using: :btree
   end
 
   create_table "locations", force: :cascade do |t|
@@ -61,4 +64,9 @@ ActiveRecord::Schema.define(version: 20160722001342) do
     t.datetime "updated_at",         null: false
   end
 
+  add_foreign_key "actor_movies", "actors"
+  add_foreign_key "actor_movies", "movies"
+  add_foreign_key "fun_facts", "movies"
+  add_foreign_key "location_movies", "locations"
+  add_foreign_key "location_movies", "movies"
 end
